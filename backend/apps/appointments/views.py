@@ -12,3 +12,5 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         if patient_id:
             queryset = queryset.filter(patient_id=patient_id)
         return queryset
+    queryset = Appointment.objects.select_related("patient").order_by("scheduled_for")
+    serializer_class = AppointmentSerializer
